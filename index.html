@@ -1,0 +1,109 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>demo_无缝滚动</title>
+    <script src="seamless_rolling.js"></script>
+    <!--<link rel="stylesheet" href="seamless_rolling11.css">-->
+    <link rel="stylesheet" href="seamless_rolling.css">
+    <style>
+        *{
+            list-style: none;
+        }
+        body{
+            background: #FFF0F5;
+        }
+        .title{
+            text-align: center;
+        }
+        .sub-title{
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2 class="title">通过js和css实现简单的无缝滚动</h2>
+    <p>
+        在进入讲解之前，先看下实现效果如下：
+    </p>
+    <div>
+        <div style="background: #ccc;margin: 10px auto;box-sizing:border-box;padding:5px;">
+            new seemlessRolling({<br/>&nbsp;&nbsp;
+            element: '#rolling',<br/>&nbsp;&nbsp;
+            images: [<br/>&nbsp;&nbsp;&nbsp;&nbsp;
+            './images/1.jpeg',<br/>&nbsp;&nbsp;&nbsp;&nbsp;
+            './images/2.jpg',<br/>&nbsp;&nbsp;&nbsp;&nbsp;
+            './images/3.jpeg',<br/>&nbsp;&nbsp;
+            ],<br/>&nbsp;&nbsp;
+            width: '80vw',<br/>&nbsp;&nbsp;
+            height: '40vw',<br/>
+            });
+        </div>
+    </div>
+    <div id="rolling"></div>
+
+    <div>
+        <p>首先，讲解下以上这个效果用到那几个知识点：</p>
+        <p style="word-wrap: break-word;">&nbsp;&nbsp;
+            1）<span class="sub-title">DocumentFragment</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;表示一个没有父级文件的最小文档对象，它被当作一个轻量版的Document使用，用户存储已排好版或者尚未打理好格式的XML片段。最大的区别是DocumentFragment不是真实DOM树的一部分，它的变化不会引起DOM树的重新渲染的操作（reflow），且不会导致性能等问题。使用：<br/>document.createRange.crateContentualFragment(html_string);
+            <br/>作用：<span style="color: blue;">该方法是作用于创建元素节点，生成滚动元素</span>
+            </p>
+        <p>相关：<a href="https://wwww.cnblogs.com/xuanhun/p/9499348.html" style="color: blue;">innerHTML</a> | <a href="https://wwww.cnblogs.com/xuanhun/p/9499348.html" style="color: blue;">DOMParser</a></p>
+        <p>&nbsp;&nbsp;
+            2）<span class="sub-title">insertRule和addRule</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;insertRule：该方法将在样式表的 cssRules 数组的指定 index 处插入（或附加）新的 CSS rule。<br/>&nbsp;&nbsp;&nbsp;&nbsp;addRule：该方法与insertRule功能相同，都是向样式表插入一条新的规则。但是该方式是特定于 IE 的方法。
+        </p>
+        <p>&nbsp;&nbsp;
+            3）<span class="sub-title">transform和transition</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;tranform：属性应用于元素的2D或3D转换。这个属性允许你将元素旋转，缩放，移动，倾斜等。<br/>&nbsp;&nbsp;&nbsp;&nbsp;transition：属性设置元素当过渡效果。（语法：transition: property duration timing-function delay;）
+        </p>
+        <p>&nbsp;&nbsp;
+            4）<span class="sub-title">transitionstart和transitionend事件</span><br/>&nbsp;&nbsp;&nbsp;&nbsp;transitionstart：动画触发事件，在动画开始的时候触发。<br/>&nbsp;&nbsp;&nbsp;&nbsp;transitionend：动画结束事件，在动画完成之后触发。
+        </p>
+        <p>
+            接下来讲解实现思路：<br/>&nbsp;&nbsp;1）一个用于挂载图片节点的div或者其他元素;<br/>&nbsp;&nbsp;2）创建图片节点并挂载到div上;<br/>&nbsp;&nbsp;3）初始化图片的起始状态;<br/>&nbsp;&nbsp;4）添加transitionstart和transitionend事件;<br/>&nbsp;&nbsp;5）启动定时器，定时滚动
+        </p>
+<!--         <div>
+            <sapn>例如：</sapn><br/>
+            <div style="background: #ccc;margin-bottom: 10px;box-sizing:border-box;padding:5px;">
+                new seemlessRolling({<br/>&nbsp;&nbsp;
+                element: '#rolling',<br/>&nbsp;&nbsp;
+                images: [<br/>&nbsp;&nbsp;&nbsp;&nbsp;
+                './images/1.jpeg',<br/>&nbsp;&nbsp;&nbsp;&nbsp;
+                './images/2.jpg',<br/>&nbsp;&nbsp;&nbsp;&nbsp;
+                './images/3.jpeg',<br/>&nbsp;&nbsp;
+                ],<br/>&nbsp;&nbsp;
+                type: 1,<br/>
+                });
+            </div>
+
+        </div> -->
+    </div>
+<!--     <div id="fragment"></div> -->
+    <div style="height: 20px;"></div>
+    <script>
+
+        new seemlessRolling({
+            element: '#rolling',
+            images: [
+                './images/1.jpeg',
+                // './images/2.jpg',
+                './images/3.jpeg',
+            ],
+            width: '80vw',
+            height: '40vw',
+        });
+
+
+
+//         new seemlessRolling({
+//             element: '#fragment',
+//             images: [
+//                 './images/1.jpeg',
+//                 './images/2.jpg',
+//                 './images/3.jpeg',
+//             ],
+//             type: 1,
+//         })
+    </script>
+</body>
+</html>
